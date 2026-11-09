@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UDE Arquitectura | Proyectos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">UDE Arquitectura</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="proyectos.html" class="activa">Proyectos</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Proyectos</h2>
+
+      <div class="filtros">
+        <button class="activo" data-filtro="todos">Todos</button>
+        <button data-filtro="vivienda">Vivienda</button>
+        <button data-filtro="rehabilitacion">Rehabilitación</button>
+        <button data-filtro="comercial">Comercial</button>
+      </div>
+
+      <!--
+        Para añadir un proyecto, copia un bloque <article> y cambia
+        data-categoria, número, título y descripción.
+        Cuando tengas fotos, sustituye el <div class="imagen"> por:
+        <div class="imagen" style="padding:0"><img src="img/mi-foto.jpg" alt="Descripción" style="width:100%;height:100%;object-fit:cover;filter:grayscale(1)"></div>
+      -->
+      <div class="grid">
+        <article class="proyecto" data-categoria="vivienda">
+          <div class="imagen">01</div>
+          <h3>Casa del Patio</h3>
+          <p>Vivienda unifamiliar, 2024</p>
+        </article>
+
+        <article class="proyecto" data-categoria="rehabilitacion">
+          <div class="imagen">02</div>
+          <h3>Rehabilitación Casco Viejo</h3>
+          <p>Rehabilitación, 2023</p>
+        </article>
+
+        <article class="proyecto" data-categoria="comercial">
+          <div class="imagen">03</div>
+          <h3>Café Atlántico</h3>
+          <p>Local comercial, 2023</p>
+        </article>
+
+        <article class="proyecto" data-categoria="vivienda">
+          <div class="imagen">04</div>
+          <h3>Edificio Mirador</h3>
+          <p>Vivienda colectiva, 2022</p>
+        </article>
+
+        <article class="proyecto" data-categoria="rehabilitacion">
+          <div class="imagen">05</div>
+          <h3>Antigua Fábrica</h3>
+          <p>Rehabilitación, 2022</p>
+        </article>
+
+        <article class="proyecto" data-categoria="comercial">
+          <div class="imagen">06</div>
+          <h3>Oficinas Puerto</h3>
+          <p>Oficinas, 2021</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>&copy; <span id="anio"></span> UDE Arquitectura</footer>
+
+  <script>
+    document.getElementById("anio").textContent = new Date().getFullYear();
+
+    var botones = document.querySelectorAll(".filtros button");
+    var proyectos = document.querySelectorAll(".proyecto");
+
+    botones.forEach(function (boton) {
+      boton.addEventListener("click", function () {
+        botones.forEach(function (b) { b.classList.remove("activo"); });
+        boton.classList.add("activo");
+
+        var filtro = boton.dataset.filtro;
+        proyectos.forEach(function (p) {
+          var visible = filtro === "todos" || p.dataset.categoria === filtro;
+          p.classList.toggle("oculto", !visible);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

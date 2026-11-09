@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UDE Arquitectura | Contacto</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">UDE Arquitectura</a>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="contacto.html" class="activa">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Contacto</h2>
+
+      <div class="contacto-layout">
+        <div class="datos">
+          <p><strong>Email</strong>ude@</p>
+          <p><strong>Teléfono</strong>+34 666 240 </p>
+        </div>
+
+        <form id="form-contacto">
+          <div>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+          </div>
+          <div>
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" rows="5" required></textarea>
+          </div>
+          <div>
+            <button type="submit" class="boton">Enviar</button>
+            <p id="mensaje-ok"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>&copy; <span id="anio"></span> UDE Arquitectura</footer>
+
+  <script>
+    document.getElementById("anio").textContent = new Date().getFullYear();
+
+    // En local no hay servidor: el formulario abre tu programa de correo con el mensaje preparado.
+    // Al publicar la web, aquí se conectará un servicio real (Formspree, Netlify Forms, etc.).
+    var form = document.getElementById("form-contacto");
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var nombre = document.getElementById("nombre").value;
+      var email = document.getElementById("email").value;
+      var mensaje = document.getElementById("mensaje").value;
+
+      var asunto = encodeURIComponent("Consulta desde la web - " + nombre);
+      var cuerpo = encodeURIComponent(mensaje + "\n\nDe: " + nombre + " (" + email + ")");
+      window.location.href = "mailto:udesegura@gmail.com?subject=" + asunto + "&body=" + cuerpo;
+
+      document.getElementById("mensaje-ok").textContent = "Gracias, " + nombre + ". Se abrirá tu correo para enviar el mensaje.";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
